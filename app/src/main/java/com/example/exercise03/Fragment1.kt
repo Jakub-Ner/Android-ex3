@@ -18,7 +18,6 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class Fragment1 : Fragment() {
-    // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
 
@@ -29,7 +28,6 @@ class Fragment1 : Fragment() {
             param2 = it.getString(ARG_PARAM2)
         }
 
-//        (requireActivity().findViewById(R.id.radioGroup) as RadioGroup).setOnCheckedChangeListener(this)
     }
 
     override fun onCreateView(
@@ -40,7 +38,7 @@ class Fragment1 : Fragment() {
         return inflater.inflate(R.layout.fragment_1, container, false)
     }
 
-    fun newInstance(): Fragment1? {
+    fun newInstance(): Fragment1 {
         val fragment = Fragment1()
         val args = Bundle()
         fragment.arguments = args

@@ -1,11 +1,14 @@
 package com.example.exercise03
 
 import android.app.Activity
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 
 // TODO: Rename parameter arguments, choose names that match
@@ -24,8 +27,9 @@ class StaticFragment : Fragment(), RadioGroup.OnCheckedChangeListener {
         fun onSelect(option: Int)
     }
 
-//    lateinit var actA: AppCompatActivity
-//    lateinit var listSF: StaticFragment.OnSelectListener
+    lateinit var actA: AppCompatActivity
+    lateinit var listF1: OnSelectListener
+
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -47,6 +51,11 @@ class StaticFragment : Fragment(), RadioGroup.OnCheckedChangeListener {
         return inflater.inflate(R.layout.fragment_static, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        (view.findViewById<RadioGroup>(R.id.radioGroup)).setOnCheckedChangeListener(this)
+
+    }
     companion object {
         /**
          * Use this factory method to create a new instance of
@@ -67,20 +76,21 @@ class StaticFragment : Fragment(), RadioGroup.OnCheckedChangeListener {
             }
     }
 
-//    override fun onAttach(activity: Activity?) {
-//        super.onAttach(activity)
-//        try {
-//            actA = activity as AppCompatActivity
-//            listSF = activity as StaticFragment.OnSelectListener
-//        } catch (e: ClassCastException) {
-//            throw ClassCastException(activity.toString() + " must implement OnSelectListener")
-//        }
-//    }
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        try {
+            actA = context as AppCompatActivity
+            listF1 = context as OnSelectListener
+        } catch (e: ClassCastException) {
+            throw ClassCastException("OnMyEventListener must be implemented")
+        }
+    }
 
     override fun onCheckedChanged(group: RadioGroup?, checkedId: Int) {
+        Log.d("myTag", "onCheckedChanged: checkedId = $checkedId")
         when (checkedId) {
-//            R.id.option1 -> listSF.onSelect(1)
-//            R.id.option2 -> listSF.onSelect(2)
+            R.id.option1 -> listF1.onSelect(1)
+            R.id.option2 -> listF1.onSelect(2)
         }
     }
 }

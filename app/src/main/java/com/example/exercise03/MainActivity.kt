@@ -1,6 +1,8 @@
 package com.example.exercise03
 
 import android.os.Bundle
+import android.util.Log
+import android.widget.FrameLayout
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
@@ -26,45 +28,18 @@ class MainActivity : AppCompatActivity(), StaticFragment.OnSelectListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//        frag1 = Fragment1().newInstance()
-//        frag2 = Fragment2().newInstance()
-//        setContent {
-//            Exercise03Theme {
-//                 A surface container using the 'background' color from the theme
-//                Surface(
-//                    modifier = Modifier.fillMaxSize(),
-//                    color = MaterialTheme.colorScheme.background
-//                ) {
-//                    Greeting("Android")
-//                }
-//            }
-//        }
+        frag1 = Fragment1().newInstance()
+        frag2 = Fragment2().newInstance()
     }
 
     override fun onSelect(option: Int) {
         val myTrans = supportFragmentManager.beginTransaction();
+        Log.d("myTag", "onSelect: option = $option")
         when (option) {
-            1 -> myTrans.replace(R.id.fragment_1, frag1!!)
-            2 -> myTrans.replace(R.id.fragment_2, frag2!!)
+            1 -> myTrans.replace(R.id.dfcontainer, frag1!!)
+            2 -> myTrans.replace(R.id.dfcontainer, frag2!!)
         }
         myTrans.commit()
+        this.myTrans = myTrans
     }
 }
-
-
-//
-//@Composable
-//fun Greeting(name: String, modifier: Modifier = Modifier) {
-//    Text(
-//        text = "Hello $name!",
-//        modifier = modifier
-//    )
-//}
-//
-//@Preview(showBackground = true)
-//@Composable
-//fun GreetingPreview() {
-//    Exercise03Theme {
-//        Greeting("Android")
-//    }
-//}

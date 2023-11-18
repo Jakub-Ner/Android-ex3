@@ -37,7 +37,7 @@ class Fragment2 : Fragment() {
         return inflater.inflate(R.layout.fragment_2, container, false)
     }
 
-    fun newInstance(): Fragment2? {
+    fun newInstance(): Fragment2 {
         val fragment = Fragment2()
         val args = Bundle()
         fragment.arguments = args

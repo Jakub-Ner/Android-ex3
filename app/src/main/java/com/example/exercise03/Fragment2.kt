@@ -1,10 +1,13 @@
 package com.example.exercise03
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SeekBar
+import androidx.core.os.bundleOf
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -20,6 +23,8 @@ class Fragment2 : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+    var value = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +42,26 @@ class Fragment2 : Fragment() {
         return inflater.inflate(R.layout.fragment_2, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        if (value != 0){
+            parentFragmentManager.setFragmentResult(
+                "msgfromchild",
+                bundleOf("msg1" to ("value from child 1= " + value))
+            )
+        }
+
+        view.findViewById<View>(R.id.btn_send).setOnClickListener { _ ->
+            val value = view.findViewById<SeekBar>(R.id.seekBar).progress
+            this.value = value
+            parentFragmentManager.setFragmentResult("msgfromchild",
+                bundleOf("msg1" to ("value from child 2= " + value))
+            )
+        }
+
+
+    }
     fun newInstance(): Fragment2 {
         val fragment = Fragment2()
         val args = Bundle()

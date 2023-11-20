@@ -1,15 +1,10 @@
 package com.example.exercise03
 
 import android.os.Bundle
-import android.util.Log
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RadioGroup
-import android.widget.RatingBar
-import android.widget.SeekBar
-import androidx.core.os.bundleOf
-import androidx.fragment.app.Fragment
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -18,10 +13,11 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [Fragment1.newInstance] factory method to
+ * Use the [FragmentRight.newInstance] factory method to
  * create an instance of this fragment.
  */
-class Fragment1 : Fragment() {
+class FragmentRight : Fragment() {
+    // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
 
@@ -31,7 +27,14 @@ class Fragment1 : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        view.findViewById<View>(R.id.btn_go_to_center).setOnClickListener { _ ->
+            parentFragmentManager.popBackStack()
+        }
     }
 
     override fun onCreateView(
@@ -39,35 +42,7 @@ class Fragment1 : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_1, container, false)
-    }
-
-    var value = 0
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        if (value != 0){
-            parentFragmentManager.setFragmentResult(
-                "msgfromchild",
-                bundleOf("msg1" to ("value from child 1= " + value))
-            )
-        }
-
-        view.findViewById<View>(R.id.btn_send).setOnClickListener { _ ->
-            val value = view.findViewById<RatingBar>(R.id.ratingBar2).rating
-            parentFragmentManager.setFragmentResult(
-                "msgfromchild",
-                bundleOf("msg1" to ("value from child 1= " + value))
-            )
-        }
-    }
-
-    fun newInstance(): Fragment1 {
-        val fragment = Fragment1()
-        val args = Bundle()
-        fragment.arguments = args
-        return fragment
+        return inflater.inflate(R.layout.fragment_right, container, false)
     }
 
     companion object {
@@ -77,18 +52,16 @@ class Fragment1 : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment Fragment1.
+         * @return A new instance of fragment FragmentRight.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            Fragment1().apply {
+            FragmentRight().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)
                 }
             }
     }
-
-
 }

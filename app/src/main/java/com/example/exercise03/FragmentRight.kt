@@ -1,10 +1,17 @@
 package com.example.exercise03
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.RadioGroup
+import android.widget.TextView
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
+import androidx.navigation.fragment.NavHostFragment
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,6 +28,9 @@ class FragmentRight : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+
+    var data = "Jakub Ner"
+    val FRAG_EDIT = "frag_edit"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -32,9 +42,17 @@ class FragmentRight : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+
+        view.findViewById<Button>(R.id.btn_go_to_edit).setOnClickListener{_ ->
+            val navController = NavHostFragment.findNavController(this)
+            navController.navigate(R.id.action_fragment_right_to_fragmentEdit)
+        }
+
         view.findViewById<View>(R.id.btn_go_to_center).setOnClickListener { _ ->
             parentFragmentManager.popBackStack()
         }
+        view.findViewById<TextView>(R.id.txt_data).text = arguments?.getString("user_data") ?: "Jakub Ner"
     }
 
     override fun onCreateView(
@@ -65,3 +83,4 @@ class FragmentRight : Fragment() {
             }
     }
 }
+

@@ -48,7 +48,7 @@ class Fragment2 : Fragment() {
         if (value != 0){
             parentFragmentManager.setFragmentResult(
                 "msgfromchild",
-                bundleOf("msg1" to ("value from child 1= " + value))
+                bundleOf("msg1" to ("value from child 2= " + value))
             )
         }
 
@@ -58,9 +58,8 @@ class Fragment2 : Fragment() {
             parentFragmentManager.setFragmentResult("msgfromchild",
                 bundleOf("msg1" to ("value from child 2= " + value))
             )
+
         }
-
-
     }
     fun newInstance(): Fragment2 {
         val fragment = Fragment2()

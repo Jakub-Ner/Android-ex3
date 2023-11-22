@@ -8,27 +8,47 @@
         android:id="@+id/fragment_center"
         android:name="com.example.exercise03.FragmentCenter"
         android:label="Fragment Center" >
-        <action
-            android:id="@+id/action_fragment_center_to_fragment_left"
-            app:popUpTo="@id/fragment_center"
-            app:launchSingleTop="true"
-            app:destination="@id/fragment_left" />
-        <action
-            android:id="@+id/action_fragment_center_to_fragment_right"
-            app:launchSingleTop="true"
-            app:popUpTo="@id/fragment_center"
-            app:destination="@id/fragment_right" />
     </fragment>
+
+    <action
+        android:id="@+id/action_fragment_center_to_fragment_left"
+        app:popUpTo="@id/fragment_center"
+        app:launchSingleTop="true"
+        app:destination="@id/fragment_left"
+        />
+    <action
+        android:id="@+id/action_fragment_center_to_fragment_right"
+        app:launchSingleTop="true"
+        app:popUpTo="@id/fragment_center"
+        app:destination="@id/fragment_right" />
 
     <fragment
         android:id="@+id/fragment_left"
         android:name="com.example.exercise03.FragmentLeft"
         android:label="Fragment Left"
-        tools:layout="@layout/fragment_left" />
+        tools:layout="@layout/fragment_left"
+        />
     <fragment
         android:id="@+id/fragment_right"
         android:name="com.example.exercise03.FragmentRight"
         android:label="Fragment Right"
-        tools:layout="@layout/fragment_right" />
+        tools:layout="@layout/fragment_right" >
+        <action
+            android:id="@+id/action_fragment_right_to_fragmentEdit"
+            app:popUpTo="@id/fragment_center"
+            app:launchSingleTop="true"
+            app:destination="@id/fragmentEdit" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentEdit"
+        android:name="com.example.exercise03.FragmentEdit"
+        android:label="fragment_edit"
+        tools:layout="@layout/fragment_edit" >
+        <action
+            android:id="@+id/action_fragmentEdit_to_fragment_right"
+            app:popUpTo="@id/fragment_center"
+            app:launchSingleTop="true"
+            app:destination="@id/fragment_right" />
+    </fragment>
 
 </navigation>
